@@ -8,7 +8,7 @@ Chihiro Nakatani, Hiroaki Kawashima, Norimichi Ukita
 Learning Group Activity Features Through Person Attribute Prediction, CVPR2024  
 Project page: [https://toyota-ti.ac.jp/Lab/Denshi/iim/ukita/selection/CVPR2024-GAFL.html](https://www.toyota-ti.ac.jp/Lab/Denshi/iim/ukita/selection/CVPR2024-GAFL.html)
 
-![Top page](https://github.com/chihina/CVPR2024-GAFL/blob/master/CVPR2024-GAFL-top.png)
+![Top page](https://github.com/chihina/GAFL-CVPR2024/blob/master/CVPR2024-GAFL-top.png)
 
 ## Environment
 python 3.10.2
