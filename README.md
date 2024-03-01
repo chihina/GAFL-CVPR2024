@@ -2,6 +2,13 @@
 
 Our codes are based on https://github.com/JacobYuan7/DIN-Group-Activity-Recognition-Benchmark.  
 I deeply appreciate their efforts.
+This is the official repository for the following paper:
+
+Chihiro Nakatani, Hiroaki Kawashima, Norimichi Ukita  
+Learning Group Activity Features Through Person Attribute Prediction, CVPR2024  
+Project page: [https://toyota-ti.ac.jp/Lab/Denshi/iim/ukita/selection/CVPR2024-GAFL.html](https://www.toyota-ti.ac.jp/Lab/Denshi/iim/ukita/selection/CVPR2024-GAFL.html)
+
+![Top page](https://github.com/chihina/Interaction-aware-Joint-Attention-Estimation-Using-People-Attributes/blob/master/CVPR2024-GAFL.png)
 
 ## Environment
 python 3.10.2
