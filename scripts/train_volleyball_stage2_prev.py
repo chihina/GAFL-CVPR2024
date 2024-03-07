@@ -76,23 +76,13 @@ cfg.use_loc_feat_prev = True
 # cfg.exp_note = 'GA ours finetune'
 
 # cfg.inference_module_name = 'group_relation_ident_volleyball'
-# cfg.exp_note = 'GR prev VOL finetune VGG'
-# cfg.exp_note = 'GR prev ImageNet pretrain VGG'
-# cfg.exp_note = 'GR prev ImageNet pretrain VGG crop'
 # cfg.exp_note = 'GR prev ImageNet pretrain VGG crop with loc'
 
 # cfg.inference_module_name = 'group_relation_ae_volleyball'
-# cfg.exp_note = 'GR prev VOL finetune autoencoder'
-# cfg.exp_note = 'GR prev ImageNet pretrain autoencoder'
-# cfg.exp_note = 'GR prev ImageNet pretrain autoencoder crop'
 # cfg.exp_note = 'GR prev ImageNet pretrain autoencoder crop with loc'
 
-cfg.inference_module_name = 'group_relation_hrn_volleyball'
-# cfg.exp_note = 'GR prev VOL finetune HRN'
-# cfg.exp_note = 'GR prev ImageNet pretrain HRN'
-# cfg.exp_note = 'GR prev ImageNet pretrain HRN crop'
-# cfg.exp_note = 'GR prev ImageNet pretrain HRN crop sigmoid'
-cfg.exp_note = 'GR prev ImageNet pretrain HRN crop sigmoid with loc'
+# cfg.inference_module_name = 'group_relation_hrn_volleyball'
+# cfg.exp_note = 'GR prev ImageNet pretrain HRN crop sigmoid with loc'
 
 print("===> Generate wandb system")
 wandb.login()

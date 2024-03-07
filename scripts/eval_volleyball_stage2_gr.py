@@ -29,7 +29,6 @@ if 'GA' in model_exp_name:
     cfg.actions_weights = [1., 1., 2., 3., 1., 2., 2., 0.2, 1.]
 else:
     stage2model = f'result/{model_exp_name}/best_model.pth'
-    # stage2model = f'result/{model_exp_name}/stage2_epoch24_2.40%.pth'
     cfg_pickle_path = os.path.join('result', model_exp_name, 'cfg.pickle')
     with open(cfg_pickle_path, 'rb') as f:
         cfg = pickle.load(f)

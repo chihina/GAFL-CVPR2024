@@ -88,42 +88,14 @@ mk_num = 12
 cfg.random_mask_type = f'random_to_{mk_num}'
 
 # cfg.inference_module_name = 'group_activity_collective'
-# cfg.inference_module_name = 'group_relation_collective'
-
-# HIGCIN INference setup
-cfg.inference_module_name = 'group_relation_higcin_collective'
-cfg.crop_size = 7, 7
-
-# Dynamic Inference setup
-# cfg.inference_module_name = 'group_relation_din_collective'
-# cfg.group = 1
-# cfg.stride = 1
-# cfg.ST_kernel_size = [(3, 3)] #[(3, 3),(3, 3),(3, 3),(3, 3)]
-# cfg.dynamic_sampling = True
-# cfg.sampling_ratio = [1]
-# cfg.lite_dim = 128 # None # 128
-# cfg.scale_factor = True
-# cfg.beta_factor = False
-# cfg.hierarchical_inference = False
-# cfg.parallel_inference = False
-# cfg.num_DIM = 1
-# cfg.train_dropout_prob = 0.3
+cfg.inference_module_name = 'group_relation_collective'
 
 if mode == 'PAC':
-    # cfg.exp_note = 'CAD GR ours HIGCIN PAC'
     cfg.exp_note = 'CAD GR ours DIN PAC'
 elif mode == 'PAF':
     cfg.exp_note = 'CAD GR ours HIGCIN PAF'
-    # cfg.exp_note = 'CAD GR ours DIN PAF'
 else:
     raise NotImplementedError
-
-# cfg.inference_module_name = 'group_activity_collective'
-# cfg.exp_note = 'CAD GA ours finetune'
-
-# cfg.inference_module_name = 'group_relation_collective'
-# cfg.exp_note = 'CAD GA ours rand mask 0 w temp cond'
-# cfg.exp_note = 'CAD GR ours recon rand mask 6 w temp cond'
 
 print("===> Generate wandb system")
 wandb.login()

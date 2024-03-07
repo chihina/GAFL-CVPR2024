@@ -76,21 +76,12 @@ cfg.use_loc_feat_prev = True
 cfg.use_ind_feat_crop = 'crop_single'
 
 # cfg.inference_module_name = 'group_relation_ident_collective'
-# cfg.exp_note = 'CAD GR prev VOL finetune VGG'
-# cfg.exp_note = 'CAD GR prev ImageNet pretrain VGG'
-# cfg.exp_note = 'CAD GR prev ImageNet pretrain VGG crop'
 # cfg.exp_note = 'CAD GR prev ImageNet pretrain VGG crop with loc'
 
 cfg.inference_module_name = 'group_relation_ae_collective'
-# cfg.exp_note = 'CAD GR prev VOL finetune autoencoder'
-# cfg.exp_note = 'CAD GR prev ImageNet pretrain autoencoder'
-# cfg.exp_note = 'CAD GR prev ImageNet pretrain autoencoder crop'
-cfg.exp_note = 'CAD GR prev ImageNet pretrain autoencoder crop with loc'
+# cfg.exp_note = 'CAD GR prev ImageNet pretrain autoencoder crop with loc'
 
 # cfg.inference_module_name = 'group_relation_hrn_collective'
-# cfg.exp_note = 'CAD GR prev VOL finetune HRN'
-# cfg.exp_note = 'CAD GR prev ImageNet pretrain HRN'
-# cfg.exp_note = 'CAD GR prev ImageNet pretrain HRN crop'
 # cfg.exp_note = 'CAD GR prev ImageNet pretrain HRN crop with loc'
 
 print("===> Generate wandb system")
