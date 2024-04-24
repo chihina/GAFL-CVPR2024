@@ -235,19 +235,19 @@ def evaluate_gar_metrics(mode, info_train, info_test, metrics_dic, cfg):
     match_score = torch.cdist(info_test[feat_dic[mode]], info_train[feat_dic[mode]], p=2)
     match_idx = torch.argmin(match_score, dim=-1)
 
-    print('===> Calculate clustering accuracy')
-    ga_gt_labels = info_test['activities_in_all'].long()
-    for num_cluster in [8, 16, 32]:
-        kmeans_gpu = KMeansGPU(n_clusters=num_cluster, mode='euclidean', verbose=0)
-        ga_cluster_labels = kmeans_gpu.fit_predict(info_test[feat_dic[mode]]).long()
-        nmi_score = NormalizedMutualInfoScore("arithmetic")
-        ga_nmi_score = nmi_score(ga_cluster_labels, ga_gt_labels).to('cpu').detach().item()
-        print(f'NRI ({mode}) k={num_cluster}', ga_nmi_score)
-        metrics_dic[f'NRI ({mode}) k={num_cluster}'] = ga_nmi_score
-        ari_score = AdjustedRandScore()
-        ga_ari_score = ari_score(ga_cluster_labels, ga_gt_labels).to('cpu').detach().item()
-        print(f'ARI ({mode}) k={num_cluster}', ga_ari_score)
-        metrics_dic[f'ARI ({mode}) k={num_cluster}'] = ga_ari_score
+    # print('===> Calculate clustering accuracy')
+    # ga_gt_labels = info_test['activities_in_all'].long()
+    # for num_cluster in [8, 16, 32]:
+    #     kmeans_gpu = KMeansGPU(n_clusters=num_cluster, mode='euclidean', verbose=0)
+    #     ga_cluster_labels = kmeans_gpu.fit_predict(info_test[feat_dic[mode]]).long()
+    #     nmi_score = NormalizedMutualInfoScore("arithmetic")
+    #     ga_nmi_score = nmi_score(ga_cluster_labels, ga_gt_labels).to('cpu').detach().item()
+    #     print(f'NRI ({mode}) k={num_cluster}', ga_nmi_score)
+    #     metrics_dic[f'NRI ({mode}) k={num_cluster}'] = ga_nmi_score
+    #     ari_score = AdjustedRandScore()
+    #     ga_ari_score = ari_score(ga_cluster_labels, ga_gt_labels).to('cpu').detach().item()
+    #     print(f'ARI ({mode}) k={num_cluster}', ga_ari_score)
+    #     metrics_dic[f'ARI ({mode}) k={num_cluster}'] = ga_ari_score
 
     print("===> Save a nearest neighbor video id")
     save_nn_video(mode, cfg, info_test, info_train, match_idx)

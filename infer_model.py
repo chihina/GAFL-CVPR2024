@@ -10,8 +10,8 @@ import torchvision
 import torchvision.models as models
 from torchvision.utils import save_image
 
-from unipose.model.unipose import unipose
-from unipose.utils.utils import get_kpts
+# from unipose.model.unipose import unipose
+# from unipose.utils.utils import get_kpts
 
 from infer_module.higcin_infer_module import CrossInferBlock
 from infer_module.dynamic_infer_module import Dynamic_Person_Inference, Hierarchical_Dynamic_Inference, Multi_Dynamic_Inference

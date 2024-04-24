@@ -17,7 +17,14 @@ import pickle
 from eval_net_gr import *
 from config_utils import update_config_all
 
-if 'GA' in model_exp_name:
+if (model_exp_name == 'GAFL_PAC') or (model_exp_name == 'GAFL_PAF'):
+    stage2model = f'result/{model_exp_name}/best_model.pth'
+    cfg_pickle_path = os.path.join('result', model_exp_name, 'cfg.pickle')
+    with open(cfg_pickle_path, 'rb') as f:
+        cfg = pickle.load(f)
+    cfg.model_exp_name = model_exp_name
+    cfg.stage2model = stage2model
+elif 'GA' in model_exp_name:
     stage2model = f'result/{model_exp_name}/best_model.pth'
     cfg=Config('volleyball')
     cfg.model_exp_name = model_exp_name

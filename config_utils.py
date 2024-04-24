@@ -95,6 +95,11 @@ def update_config_all(cfg):
         pass
     else:
         cfg.use_same_enc_dual_path = False
+    
+    if 'use_jae_loss' in dir(cfg):
+        pass
+    else:
+        cfg.use_jae_loss = False
 
     return cfg
 

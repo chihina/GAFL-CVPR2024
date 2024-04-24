@@ -4,6 +4,7 @@ IFS=$'\n'
 model_array=(
     # Please fill in the model path
     # 'model_dir_name'
+    'GAFL_PAC_VOL'
     )
 
 for model in ${model_array[@]}; do
