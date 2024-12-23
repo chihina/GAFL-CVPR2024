@@ -11,7 +11,8 @@ Project page: [https://toyota-ti.ac.jp/Lab/Denshi/iim/ukita/selection/CVPR2024-G
 ![Top page](https://github.com/chihina/GAFL-CVPR2024/blob/master/CVPR2024-GAFL-top.png)
 
 ## Environment
-python 3.10.2
+python 3.10.2  
+ROIAligh [https://github.com/longcw/RoIAlign.pytorch]
 
 And you can use requirements.txt
 ```
