@@ -447,19 +447,6 @@ def eval_net(cfg):
 
     # pack models
     models = {'model': model}
-
-    if cfg.mode == 'PAC_DC':
-        model_pac_net = gcnnet_list[cfg.pseudo_classifier_mode](cfg)
-        state_dict_pac_net = torch.load(cfg.stage2model)['state_dict_pac_net']
-        new_state_dict_pac_net=OrderedDict()
-        for k, v in state_dict_pac_net.items():
-            name = k[7:] 
-            new_state_dict_pac_net[name] = v
-        model_pac_net.load_state_dict(new_state_dict_pac_net)
-        print_log(cfg.log_path, f'Loading stage{cfg.eval_stage} model pac net: ' + cfg.stage2model)
-        model_pac_net=model_pac_net.to(device=device)
-        models['model_pac_net'] = model_pac_net
-
     test_list={'volleyball':test_volleyball, 'collective':test_collective}
     test=test_list[cfg.dataset_name]
     info_train=test(training_loader, models, device, 0, cfg)
@@ -558,43 +545,6 @@ def test_volleyball(data_loader, models, device, epoch, cfg):
             individual_features = torch.zeros(len(data_loader), cfg.num_features_boxes*2*cfg.num_boxes).to(device=device)
             group_features = torch.zeros(len(data_loader), cfg.num_features_boxes*2).to(device=device)
 
-    # generate pseudo labels from person perfeatures with k-means
-    if cfg.mode == 'PAC_DC':
-        print('Obtain features for clustering...')
-        model_pac_net = models['model_pac_net']
-        
-        with torch.no_grad():
-            for batch_idx, batch_data in enumerate(tqdm(data_loader)):
-                for key in range(len(batch_data)):
-                    if torch.is_tensor(batch_data[key]):
-                        batch_data[key] = batch_data[key].to(device=device)
-                batch_size=batch_data[0].shape[0]
-                num_frames=batch_data[0].shape[1]
-                input_data = {}
-                input_data['images_in'] = batch_data[0]
-                input_data['boxes_in'] = batch_data[1]
-                input_data['actions_in'] = batch_data[2]
-                input_data['images_person_in'] = batch_data[4]
-
-                # obtain person features
-                ret_pac_net = model_pac_net(input_data)
-                person_features_pac_net = ret_pac_net['person_features']
-                person_features_pac_net_dim = person_features_pac_net.shape[-1]
-                if batch_idx == 0:
-                    person_features_pac_net_all = torch.zeros(len(data_loader), cfg.batch_size, cfg.num_boxes, person_features_pac_net_dim).to(device=device)
-                person_features_pac_net_all[batch_idx, :batch_size] = person_features_pac_net.detach().reshape(batch_size, cfg.num_boxes, -1)
-                # break
-
-        person_features_pac_net_all = person_features_pac_net_all.reshape(len(data_loader)*cfg.batch_size*cfg.num_boxes, -1)
-        print('Clustering in processing...')
-        kmeans_gpu = KMeansGPU(n_clusters=cfg.num_actions, mode='euclidean', verbose=0)
-        pseudo_action_labels = kmeans_gpu.fit_predict(person_features_pac_net_all)
-        pseudo_action_labels = pseudo_action_labels.reshape(len(data_loader), cfg.batch_size*cfg.num_boxes)
-        pseudo_action_labels_weight = torch.zeros(cfg.num_actions).to(device=device)
-        for i in range(cfg.num_actions):
-            pseudo_action_labels_weight[i] = torch.sum(torch.eq(pseudo_action_labels, i).float())
-        print('Clustering results:', pseudo_action_labels_weight)
-
     with torch.no_grad():
         for batch_idx, batch_data_test in enumerate(tqdm(data_loader)):
             for key in range(len(batch_data_test)):
@@ -612,25 +562,11 @@ def test_volleyball(data_loader, models, device, epoch, cfg):
             loss_list = []
 
             # forward
-            # ret = model((batch_data_test[0], batch_data_test[1]))
-            # ret = model((batch_data_test[0], batch_data_test[1], batch_data_test[4]))
             input_data = {}
             input_data['images_in'] = batch_data_test[0]
             input_data['boxes_in'] = batch_data_test[1]
             input_data['images_person_in'] = batch_data_test[4]
-
-            # recognize actions
-            if cfg.mode == 'PAC_DC':
-                ret_pac_net = model_pac_net(input_data)
-                action_scores_pac_net = ret_pac_net['pseudo_scores']
-                action_scores_pac_net_label = torch.argmax(action_scores_pac_net, dim=1)
-                # print('Predicted pseudo action labels:', action_scores_pac_net_label)
-                # print('Ground-truth action labels:', actions_in[0, 0])
-                # print('Ground-truth pseudo action labels:', pseudo_action_labels[batch_idx])
-                # if batch_idx > 5:
-                    # break
-
-            ret= model(input_data)
+            ret = model(input_data)
 
             # Predict actions
             actions_in=actions_in[:,0,:].reshape((batch_size*cfg.num_boxes,))

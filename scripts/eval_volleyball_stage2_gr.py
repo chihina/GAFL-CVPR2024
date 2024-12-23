@@ -17,13 +17,14 @@ import pickle
 from eval_net_gr import *
 from config_utils import update_config_all
 
-if (model_exp_name == 'GAFL_PAC') or (model_exp_name == 'GAFL_PAF'):
+if ('GAFL_PAC' in model_exp_name) or ('GAFL_PAF' in model_exp_name):
     stage2model = f'result/{model_exp_name}/best_model.pth'
     cfg_pickle_path = os.path.join('result', model_exp_name, 'cfg.pickle')
     with open(cfg_pickle_path, 'rb') as f:
         cfg = pickle.load(f)
     cfg.model_exp_name = model_exp_name
     cfg.stage2model = stage2model
+    cfg.inference_module_name = 'group_relation_volleyball'
 elif 'GA' in model_exp_name:
     stage2model = f'result/{model_exp_name}/best_model.pth'
     cfg=Config('volleyball')
@@ -50,10 +51,6 @@ cfg.use_multi_gpu = True
 cfg.image_size = 320, 640
 cfg.eval_only = True
 cfg.eval_stage = 2
-# cfg.train_seqs = [1]
-# cfg.test_seqs = [4]
-# cfg.old_act_rec = False
-# cfg.old_act_rec = True
 cfg.eval_mask_num = eval_mask_num
 
 # vgg16 setup
@@ -65,9 +62,6 @@ cfg.eval_mask_num = eval_mask_num
 # cfg.inference_module_name = 'group_activity_volleyball'
 # cfg.model_exp_name = '[GA ours finetune_stage2]<2023-07-07_09-43-38>'
 # cfg.stage2model = f'result/{cfg.model_exp_name}/stage2_epoch3_0.70%.pth'
-
-# Prev net setup
-# cfg.inference_module_name = 'group_relation_volleyball'
 
 cfg.batch_size = 1
 cfg.test_batch_size = 1

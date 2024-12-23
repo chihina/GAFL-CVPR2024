@@ -140,29 +140,6 @@ class GroupRelation_volleyball(nn.Module):
         self.pos_enc_iar = positionalencoding2d(2*NFB, H, W)
         self.tem_enc_iar = positionalencoding1d(2*NFB, 100)
 
-        # keypoint estimation
-        if self.use_pose_loss:
-            pose_model_type = 'LSP'
-            # pose_model_type = 'MPII'
-            if pose_model_type == 'LSP':
-                self.cfg.keypoint_num = 14
-            elif pose_model_type == 'MPII':
-                self.cfg.keypoint_num = 16
-
-            self.pose_model = unipose(pose_model_type, num_classes=self.cfg.keypoint_num, backbone='resnet', output_stride=16, 
-                            sync_bn=True, freeze_bn=False, stride=8)
-            checkpoint = torch.load(os.path.join('pretrained_weights', f'UniPose_{pose_model_type}.tar'))
-            p = checkpoint['state_dict']
-            state_dict = self.pose_model.state_dict()
-            pose_model_dict = {}
-            for k,v in p.items():
-                if k in state_dict:
-                    pose_model_dict[k] = v
-            state_dict.update(pose_model_dict)
-            self.pose_model.load_state_dict(state_dict)
-            self.pose_model = self.pose_model.to(device=torch.device('cuda'))
-            self.pose_model.eval()
-
         # recog_head_mid_num
         if self.final_head_mid_num == 0:
             self.fc_actions_with_gr = nn.Sequential(
