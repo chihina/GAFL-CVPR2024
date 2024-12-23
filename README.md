@@ -12,7 +12,7 @@ Project page: [https://toyota-ti.ac.jp/Lab/Denshi/iim/ukita/selection/CVPR2024-G
 
 ## Environment
 python 3.10.2  
-ROIAligh [https://github.com/longcw/RoIAlign.pytorch]
+ROIAlign [https://github.com/longcw/RoIAlign.pytorch]
 
 And you can use requirements.txt
 ```
