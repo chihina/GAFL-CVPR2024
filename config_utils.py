@@ -101,6 +101,11 @@ def update_config_all(cfg):
     else:
         cfg.use_jae_loss = False
 
+    if 'eval_mask_num' in dir(cfg):
+        pass
+    else:
+        cfg.eval_mask_num = 0
+    
     return cfg
 
 

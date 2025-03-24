@@ -1,6 +1,6 @@
 import sys
 sys.path.append(".")
-device_list = '3'
+device_list = '7'
 import os
 os.environ['CUDA_VISIBLE_DEVICES'] = device_list
 import wandb
@@ -18,6 +18,7 @@ cfg.use_recon_loss = False
 cfg.use_act_loss = False
 cfg.use_pose_loss = False
 cfg.use_recon_diff_loss = False
+cfg.use_jae_loss = False
 
 if mode == 'PAC':
     cfg.train_backbone = True
@@ -69,6 +70,8 @@ cfg.max_epoch = 100
 # stage2 setup
 cfg.use_res_connect = False
 cfg.use_trans = True
+cfg.use_same_enc_dual_path = False
+# cfg.use_same_enc_dual_path = True
 cfg.trans_head_num = 1
 cfg.trans_layer_num = 1
 
@@ -91,9 +94,9 @@ cfg.random_mask_type = f'random_to_{mk_num}'
 cfg.inference_module_name = 'group_relation_collective'
 
 if mode == 'PAC':
-    cfg.exp_note = 'CAD GR ours DIN PAC'
+    cfg.exp_note = 'GAFL-PAC CAD'
 elif mode == 'PAF':
-    cfg.exp_note = 'CAD GR ours HIGCIN PAF'
+    cfg.exp_note = 'GAFL-PAF CAD'
 else:
     raise NotImplementedError
 

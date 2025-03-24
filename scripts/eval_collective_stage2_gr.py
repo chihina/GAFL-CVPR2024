@@ -38,6 +38,7 @@ cfg.eval_stage = 2
 # cfg.test_seqs = [4]
 # cfg.old_act_rec = False
 # cfg.old_act_rec = True
+cfg.eval_mask_num = 0
 
 cfg.batch_size = 1
 cfg.test_batch_size = 1

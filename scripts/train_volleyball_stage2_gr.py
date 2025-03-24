@@ -97,9 +97,11 @@ cfg.random_mask_type = f'random_to_{mk_num}'
 cfg.inference_module_name = 'group_relation_volleyball'
 
 if mode == 'PAC':
-    cfg.exp_note = f'GR ours PAC'
+    cfg.exp_note = 'GAFL-PAC VOL'
 elif mode == 'PAF':
-    cfg.exp_note = 'GR ours PAF'
+    cfg.exp_note = 'GAFL-PAF VOL'
+else:
+    raise NotImplementedError
 
 print("===> Generate wandb system")
 wandb.login()

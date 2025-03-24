@@ -426,7 +426,7 @@ def eval_net(cfg):
             state_dict = torch.load(cfg.stage2model)['state_dict']
             new_state_dict=OrderedDict()
             for k, v in state_dict.items():
-                name = k[7:] 
+                name = k[7:] if k.startswith('module.') else k
                 new_state_dict[name] = v
             model.load_state_dict(new_state_dict)
             print_log(cfg.log_path, f'Loading stage{cfg.eval_stage} model: ' + cfg.stage2model)
@@ -434,7 +434,7 @@ def eval_net(cfg):
             state_dict = torch.load(cfg.stage2model)['state_dict']
             new_state_dict=OrderedDict()
             for k, v in state_dict.items():
-                name = k[7:] 
+                name = k[7:] if k.startswith('module.') else k
                 new_state_dict[name] = v
             model.load_state_dict(new_state_dict)
             print_log(cfg.log_path, f'Loading stage{cfg.eval_stage} model: ' + cfg.stage2model)
