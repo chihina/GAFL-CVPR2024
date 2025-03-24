@@ -3,7 +3,7 @@ IFS=$'\n'
 
 model_array=(
     # Please fill in the model path
-    '[GAFL-PAF CAD_stage2]<2025-03-24_13-44-20>'
+    # 'model_name'
   )
 
 for model in ${model_array[@]}; do
