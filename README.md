@@ -10,6 +10,19 @@ Project page: [https://toyota-ti.ac.jp/Lab/Denshi/iim/ukita/selection/CVPR2024-G
 
 ![Top page](https://github.com/chihina/GAFL-CVPR2024/blob/master/CVPR2024-GAFL-top.png)
 
+# Citation
+
+```
+@inproceedings{DBLP:conf/cvpr/NakataniKU24,
+  author       = {Chihiro Nakatani and
+                  Hiroaki Kawashima and
+                  Norimichi Ukita},
+  title        = {Learning Group Activity Features Through Person Attribute Prediction},
+  booktitle    = {CVPR},
+  year         = {2024},
+}
+```
+
 ## Environment
 python 3.10.2  
 ROIAlign (https://github.com/longcw/RoIAlign.pytorch)
